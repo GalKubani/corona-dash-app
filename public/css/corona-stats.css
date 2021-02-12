@@ -1,0 +1,130 @@
+.corona-stats-main{
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(152, 168, 240, 0.3);
+    padding: 15px;
+    justify-content: space-between;
+}
+.stats-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1rem;
+    width: 230px;
+    height: 240px;
+    background: white;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-radius: 8px;
+}
+
+.stats-divider{
+    display: flex;
+    position: relative;
+    top:0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 50%;
+    width: 100%;
+}
+.stats-body{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.stats-title{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.row{
+    flex-direction: row;
+}
+.more-info{
+    background-color:  #bcbcbc;
+    border-radius: 50%;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    font-weight: 500;
+    margin-right: 8px;
+    margin-top: 10px;
+}
+.more-info:hover{
+    cursor: default;
+}
+.info-modal{
+    display: block;
+    opacity: 0;
+    width: 280px;
+    z-index: 30;
+    position: relative;
+    bottom:0;
+    left:160px;
+    border-radius: 4px;
+    padding: 8px;
+    background: white;
+    border: 1px solid rgb(127, 158, 168);
+    color: rgb(127, 158, 168);
+    transition: opacity 0.2s linear;
+    font-size: 0.8rem;
+}
+.last{
+    left:280px;
+}
+h4,h3,h2{
+    margin: 0;
+    margin-top: 10px;
+}
+.vacination-title{
+    font-size: 1.6rem;
+    padding: 26px;
+    text-align: center;
+    font-weight: 700;
+}
+.patient-location{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.patient-location-option{
+    display: flex;
+    flex-direction: column;
+    max-width: 33%;
+    padding:1%;
+    margin: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.column{
+    flex-direction: column;
+}
+.critical{
+    margin-top: 25px;
+    margin-bottom: 3px;
+}
+.critical-logo{
+    background: red;
+}
+.ressesitated-logo{
+    background: yellow;
+}
+.gradeContainer{
+    width: 25px;
+    margin-right: 55px
+}
+.logo{ 
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.change{
+    font-size: 0.9rem;
+    margin-top: 5px;
+}

@@ -1,0 +1,59 @@
+.vacination-title{
+    width: 100%;
+}
+.chart-title{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.chart-title-text{
+    width: 55%;
+}
+.chart-range{
+    background: white;
+    border: 0px;
+    margin-left: 40px;
+}
+.deceased-chart-button{
+    position: relative;
+    top:90px;
+    right: 5px;
+}
+.positives-chart-button{
+    position: relative;
+    top:46px;
+    right: 5px;
+}
+.deceased-chart-button:hover,
+.positives-chart-button:hover{
+    cursor: pointer;
+}
+.popup-chart-container{
+    display: none;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.chart-container{
+    width: 400px;
+    height: 300px;
+    position: relative;
+    background: white;
+}
+.vacination-stats-main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:20px;
+    align-items: center;
+    background:  rgba(152, 168, 240, 0.3);
+}
+.open{
+    display: flex;
+    position: relative;
+    width: 400px;
+    z-index: 30;
+    height: 300px;
+    top:00px;
+    left: 630px;
+}

@@ -1,0 +1,118 @@
+.table-blanks-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background:  rgba(152, 168, 240, 0.3);
+}
+.table{
+    width: 100%;
+    background:  rgba(152, 168, 240, 0.3);
+}
+.blank-chart{
+    width: 400px;
+    height: 300px;
+    margin-top: 10px;
+    background: white;
+}
+.table-container{
+    height: 300px;
+    margin-top: 10px;
+    width: 1050px;
+    padding:25px;
+    overflow: auto;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background:  white;
+}
+.table-title-text{
+    width: 60%;
+    margin-left: 0px;
+    background:white;
+    height: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.table-body{
+    background: white   ;
+}
+.table-data{
+    width: 150px;
+    font-weight: 700;
+    padding-top:10px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.search-bar{
+    height: 20px;
+    border-radius: 15px;
+}
+.precentage-bar{
+    height: 12px;
+    display: inline-block;
+    margin-right: 10px;
+}
+.first-vacine-color{
+    background: rgb(28, 125, 126,0.8);
+}
+.second-vacine-color{
+    background:rgb(182, 202, 81,0.8);
+}
+th:hover{
+    cursor: pointer;
+}
+.stoplight-green{
+    background: lightgreen;
+}
+.stoplight-red{
+    background: red;
+}
+.stoplight-yellow{
+    background: yellow;
+}
+.stoplight-orange{
+    background: orange;
+}
+.color-container{
+    font-size: .9rem;
+    font-weight: 400;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+    width: min-content;
+}
+.color-text{
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    margin: 0 16px 0 16px;
+}
+.light{
+    color: rgb(0, 0, 0,0.5);
+    width: 100%;
+    font-style: italic;
+    font-weight: 200;
+}
+.small{
+    font-size: 0.8rem;
+}
+.label-area{
+    display: flex;
+    flex-flow: column;
+    line-height: 1.4em;
+}
+.size{
+    width: 70%;
+}
+.smaller{
+    width:700px;
+}
+.square{
+    width: 32px;
+    height: 32px;
+    margin:4px;
+}

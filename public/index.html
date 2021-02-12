@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/download.png">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/corona-stats.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/tables.css">  
+    <link rel="stylesheet" href="css/media.css">
+    <!-- <link rel="stylesheet" href="css/changeview.css"> will add with click event-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>קורונה - לוח בקרה</title>
+</head>
+<body>
+    <header class="main-header">
+        <div class="line"></div>
+        <div class="topright-container">
+            <button class="toggle-button">
+                <span class="toggle-button__bar"></span>
+                <span class="toggle-button__bar"></span>
+                <span class="toggle-button__bar"></span>
+            </button>
+                <img class="main-header__brand" src="images/logo_DAshboard-01.png">
+        </div>
+        <div class="title-container">
+        <span class="main-title">נגיף הקורונה בישראל - תמונת מצב כללית</span>
+        <span id="sub-title" class="sub-title"></span>
+        </div>
+        <button id="display-button" class="accessable-display-button">לתצוגה נגישה</button>
+        </nav>
+    </header>
+    <main class="body-container">
+        <div class="corona-stats-main">
+            <span class="stats-container"> 
+                <div class="stats-title"><h4>מאומתים חדשים אתמול</h4>
+                    <span class="more-info">i<div class="info-modal">
+                        סך הנדבקים בנגיף COVID-19 בישראל שאותרו משעה 00:00 עד לשעה 23:59 של יום אתמול
+                    </br> מאומת- כל מי שנבדק ונמצא חיובי לנגיף COVID-19, בין אם הופיעו אצלו תסמינים ובין אם לא, בין אם הוא חולה, החלים או נפטר
+                    </div></span>
+                </div>
+                <div class="stats-body">  
+                    <div></div>
+                   <div><span class="change bold"> </span>מחצות</div> 
+                    <div><span class="total bold"> </span>סה"כ</div> 
+                </div>
+            </span>
+            <span class="stats-container"> 
+                <div class="stats-title"><h4>חולים פעילים</h4>
+                    <span class="more-info">i<div class="info-modal">
+                        חולה פעיל - כל מי שנבדק ונמצא חיובי לנגיף COVID-19, ללא קשר להופעת תסמינים, שטרם הוגדר כמחלים ולא נפטר
+                    </div></span></div>
+                <div class="stats-body"> 
+                    <div></div>
+                    <div><span class="change bold"> </span>מחצות</div> 
+                </div>
+                <div class="patient-location">
+                    <span class="patient-location-option">
+                        <span class="location-name">בית / קהילה </span>
+                        <span id="home" class="location-amount bold">49,200</span>
+                    </span>
+                    <span class="patient-location-option">
+                        <span class="location-name">מלון </span>
+                        <span id="hotel" class="location-amount bold">1,400</span>
+                    </span>
+                    <span class="patient-location-option">
+                        <span class="location-name"> בי"ח </span>
+                        <span id="hospital" class="location-amount bold">1,400</span>
+                    </span>
+
+                </div>
+            </span>
+            <span class="stats-container"> 
+                <div class="stats-title"><h4>חולים קשה  </h4>
+                    <span class="more-info">i<div class="info-modal">
+                        סך החולים במצב קשה וקירטי כפי שהוגדרו ע"י מערכת הבריאות, המאושפזים בבתי החולים
+                    </div></span></div>
+                <div class="stats-body">     
+                    <div class="change"><h3>457</h3> </div>
+                    <div><span class="change bold">24+ </span>מחצות</div> 
+                    <div id="patient-condition" class="patient-condition">
+                        <div class="critical"><span class="critical-logo logo"></span>מתוכם קריטי <span class="bold">120</span> </div>
+                        <div class="ressesitated"><span class="ressesitated-logo logo"></span>מונשמים <span class="bold">89</span></div>
+                    </div>
+                </div>
+            </span>
+            <span class="stats-container"> 
+                <div class="stats-divider">
+                    <div class="stats-title column"></div>
+                    <div class="stats-body">   
+                        <div>מחצות</div> 
+                    </div>
+                </div>
+                <div class="stats-divider">
+                    <div class="stats-title column"></div>
+                    <div class="stats-body">   
+                        <div>מחצות</div> 
+                    </div>
+                </div>
+            </span>
+            <span class="stats-container"> 
+                <div class="stats-title"><h4>  נפטרים מצטבר</h4>
+                    <span class="more-info">i<div class="info-modal">
+                        סך הנפטרים מנגיף COVID-19 בישראל, החל מפרוץ המגפה
+                    </div></span>
+                </div>
+                <div class="stats-body">  </div>
+                <span id="deceased-button" class="deceased-chart-button">
+                    <!-- nn to add the 3 line "logo" here -->
+                    מגמת שינוי יומית
+                </span>
+                <div class="popup-chart-container">
+                    <canvas id="deceased-chart"> </canvas>
+                </div>
+            </span>
+            <span class="stats-container"> 
+                <div class="stats-title"><h4>  אחוז בדיקות חיוביות אתמול </h4>
+                    <span class="more-info">i<div class="info-modal last">
+                        אחוז הבדיקות החיוביות מתוך סך הבדיקות לגילוי הנגיף בפעם הראשונה לכל נבדק, שתוצאותיהן התקבלו משעה 00:00 עד שעה 23:59 של יום אתמול
+                    </br> בדיקות אתמול- מספר תוצאות של בדיקות, הן לבדיקה לזיהוי ראשוני של הנגיף והן לבדיקה נלוות לקביעת החלמה, שהתקבלו החל מחצות 00:00 עד שעה 23:59 של אתמול
+                    </div></span></div>
+                <div class="stats-body">     </div>
+                <span id="positives-button" class="positives-chart-button">
+                    <!-- nn to add the 3 line "logo" here -->
+                    בדיקות יומיות
+                </span>
+                <div class="popup-chart-container positioning">
+                    <canvas id="positives-chart"> </canvas>
+                </div>
+            </span>
+        </div>
+        <div class="vacination-title">מדדי התחסנות</div>
+        <div class="vacination-stats-main">
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <div class="chart-title-text">מספר מתחסנים - יומי</div>
+                        <select id="vacination-daily-chart-selector" class="chart-range">
+                            <option value="last-month">חודש האחרון</option>
+                            <option value="last-week">שבוע האחרון</option>
+                            <option value="last-two-weeks">שבועיים האחרונים</option>
+                            <option value="all-time">עד עכשיו</option>
+                        </select>
+                    </div>
+                    <canvas id="vacination-daily-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <div class="chart-title-text">מספר מתחסנים - מצטבר</div>
+                        <select id="vacination-total-chart-selector" class="chart-range">
+                            <option value="last-month">חודש האחרון</option>
+                            <option value="last-week">שבוע האחרון</option>
+                            <option value="last-two-weeks">שבועיים האחרונים</option>
+                            <option value="all-time">עד עכשיו</option>
+                        </select>
+                    </div>
+                    <canvas id="vacination-total-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <div class="chart-title-text">אחוז מתחסנים מכלל האוכלוסיה</div>
+                        <select id="vacination-precentage-chart-selector" class="chart-range">
+                            <option value="last-month">חודש האחרון</option>
+                            <option value="last-week">שבוע האחרון</option>
+                            <option value="last-two-weeks">שבועיים האחרונים</option>
+                            <option value="all-time">עד עכשיו</option>
+                        </select>
+                    </div>
+                    <canvas id="vacination-precentage-chart"></canvas>
+                </div>
+        </div>
+        <div class="table-blanks-container">
+            <div class="table-container">
+                <div class="flex">
+                    <div class="table-title-text"> התחסנות לפי ישובים</div>
+                    <input placeholder="חיפוש ישוב" id="search-bar-city" class="search-bar" type="search">
+                </div>
+                <table class="city-vacine table">
+                    <thead class="city-vacine-header">
+                        <th>ישוב</th>
+                        <th>% מתחסנים מנה ראשונה</th>
+                        <th>% מתחסנים מנה שנייה</th>
+                        <th>חולים פעילים</th>
+                        <th>חולים פעילים לכל 10,000 נפשות </th>
+                        <th>ציון יומי מחושב</th>
+                    </thead>
+                    <tbody class="table-body" id="city-vacine-body">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="blank-chart"></div><div class="blank-chart"></div>
+            <div class="blank-chart"></div><div class="blank-chart"></div>
+            <div class="blank-chart"></div><div class="blank-chart"></div>
+            <div class="blank-chart"></div><div class="blank-chart"></div>
+            <div class="blank-chart"></div><div class="blank-chart"></div>
+            <div class="table-container">
+                <div class="flex">
+                    <div class="media-div"> 
+                        <div class="table-title-text"> תכנית הרמזור</div>
+                        <input placeholder="חיפוש ישוב" id="search-bar-stoplight" class="search-bar" type="search">
+                        <div class="bold small">* מרכיבי ציון הרמזור (לפי נתוני השבוע האחרון)</div>
+                    </div>
+                    <div class="color-container">
+                        <div class="color-text">
+                            <div class="square stoplight-green"></div>
+                            <div class="label-area">
+                                <span class="size">ירוק - פעילות מורחבת</span>
+                                <span class="light">ציון החל מ7.5</span>
+                            </div>
+                        </div>
+                        <div class="color-text">
+                            <div class="square stoplight-yellow"></div>
+                            <div class="label-area">
+                                <span class="size">צהוב - פעילות מוגבלת</span>
+                                <span class="light">ציון בין 5 ל7.5</span>
+                            </div>
+                        </div>
+                        <div class="color-text">
+                            <span class="square stoplight-orange"></span>
+                            <div class="label-area">
+                                <span class="size">כתום - פעילות מצומצמת</span>
+                                <span class="light">ציון בין 2.5 ל5</span>
+                            </div>
+                        </div>
+                        <div class="color-text">
+                            <div class="square stoplight-red"></div>
+                            <div class="label-area">
+                                <span class="size">אדום - פעילות מינימלית</span>
+                                <span class="light">ציון עד 2.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="stoplight table">
+                    <thead class="stoplight-header">
+                        <th>ישוב</th>
+                        <th>ציון וצבע יומי</th>
+                        <th>חולים חדשים לכל 10000 נפש</th>
+                        <th>% הבדיקות החיוביות</th>
+                        <th>שיעור שינוי מאומתים</th>
+                        <th>חולים פעילים</th>
+                    </thead>
+                    <tbody class="table-body" id="stoplight-table-body">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="blank-chart"></div>
+            <div class="table-container smaller">
+                <div class="table-title-text"> סטטוס בתי חולים</div>
+                <table class="hospital-status table">
+                    <thead class="hospital-header"> 
+                        <th>בית חולים</th>
+                        <th>% תפוסה כללי</th>
+                        <th>% תפוסה קורונה</th>
+                        <th>אנשי צוות מאומתים ובבידוד</th>
+                    </thead>
+                    <tbody class="table-body" id="hospital-table-body">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="blank-chart"></div>
+            <div class="blank-chart"></div>
+            <div class="blank-chart"></div>
+            <div class="blank-chart"></div>
+        </div>
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>

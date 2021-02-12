@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+    width: 100%;
+    direction: rtl;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
+    display:block;
+    height: 100%;
+}
+button:hover{
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+    width: 8px;
+} 
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.main-header {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+}
+.topright-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-header__brand {
+    height: 100%;
+    width: 252px;
+    height: 48px;
+    object-fit: contain;
+}
+.toggle-button {
+    width: 2.2rem;
+    height: 3rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+}
+.toggle-button:focus {
+    outline: none;
+}
+.toggle-button__bar {
+    width: 100%;
+    height: 0.2rem;
+    border-radius: 4px;
+    background: rgb(48, 48, 48);
+    display: block;
+    margin: 0.25rem 0;
+}
+.line{
+    right: 0;
+    left: 0;
+    top:0;
+    position: absolute;
+    z-index: 1;
+    height: 2px;
+    background-image: linear-gradient(90deg,#4bb887,#16b6d0,#d6e58a);
+}
+.title-container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.main-title{
+    font-size: 1.2rem;
+    white-space: nowrap;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    color: #24343f;
+}
+.sub-title{
+    font-size: .9rem;
+    text-align: center;
+    color: #24343f;
+}
+.accessable-display-button{
+    background-color: #39475d;
+    border-color: #39475d;
+    border-radius: 50px;
+    padding: 5px 15px;
+    font-weight: 400;
+    font-size: 1rem;
+    color:white;
+    margin-left: 40px;
+}
+.bold{
+    font-weight: bold;
+}

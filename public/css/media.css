@@ -1,0 +1,75 @@
+@media (max-width:400px){
+    .main-header{
+        height: 135px;
+        position: fixed;
+        padding-top: 10px;
+        flex-wrap: wrap;
+        z-index: 100;
+        background: white;
+    }
+    .corona-stats-main{
+        padding-top: 150px;
+    }
+    .title-container{
+        width: 60%;
+        margin-right: 10px;
+    }
+    .main-title{
+        font-size: 0.8rem;
+    }
+    .sub-title{
+        text-align: right;
+        width: fit-content;
+        font-size: 0.7rem;
+        padding-right: 5px;
+    }
+    .accessable-display-button{
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        margin-left: 20px;
+    }
+    body{
+        width: 100%;
+    }
+    .table{
+        width: 100%;
+    }
+    .stats-container{
+        width: 45%;
+    }
+    .info-modal{
+        width: 200px;
+        left: 150px;
+    }
+    .open{
+        width: 90vw;
+        top:-20px;
+        left: 120px;
+    }
+    .positioning{
+        left:320px
+    }
+    .chart-container{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .table-container{
+        font-size: 0.8rem;
+        padding:15px;
+    }
+    .color-container{
+        flex-direction: column;
+        width: 50%;
+        font-size: 0.7rem;
+    }
+    .media-div{
+        width: 50%;
+    }
+    .square{
+        width: 20px;
+        height: 20px;
+    }
+    .gradeContainer{
+        margin: 0px;
+    }
+}
