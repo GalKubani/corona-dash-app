@@ -13,7 +13,7 @@
 .blank-chart{
     width: 400px;
     height: 300px;
-    margin-right: 32px;
+    margin-right: 22px;
     margin-top: 10px;
     background: white;
     border-radius: 10px;
@@ -22,7 +22,7 @@
     margin-right: 32px;
     height: 300px;
     margin-top: 10px;
-    width: 1050px;
+    width: 1030px;
     padding:25px;
     overflow: auto;
     flex-wrap: wrap;
@@ -130,7 +130,8 @@ th:hover{
     width: 70%;
 }
 .smaller{
-    width:700px;
+    width:630px;
+
 }
 .square{
     width: 32px;

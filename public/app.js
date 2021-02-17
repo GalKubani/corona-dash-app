@@ -475,8 +475,8 @@ function updateDatabaseUI(updateIndex){
 }
 function checkIfAccessableView(chart){
     if(document.getElementById("view-css")){
-        chart.config.data.datasets[0].backgroundColor="lightgreen"
-        chart.config.data.datasets[1].backgroundColor="red"
+        chart.config.data.datasets[0].backgroundColor="rgb(159,250,130)"
+        chart.config.data.datasets[1].backgroundColor="rgb(253,130,100)"
         chart.update()
     }
 }
