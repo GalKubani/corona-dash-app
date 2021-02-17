@@ -1,21 +1,25 @@
 .table-blanks-container{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
-    background:  rgba(152, 168, 240, 0.3);
+    align-items: center;
+    background:  #edf1f7;
+    width: 100%;
 }
 .table{
     width: 100%;
-    background:  rgba(152, 168, 240, 0.3);
+    background:  #edf1f7;
 }
 .blank-chart{
     width: 400px;
     height: 300px;
+    margin-right: 32px;
     margin-top: 10px;
     background: white;
+    border-radius: 10px;
 }
 .table-container{
+    margin-right: 32px;
     height: 300px;
     margin-top: 10px;
     width: 1050px;
@@ -24,12 +28,13 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     background:  white;
+    border-radius: 10px;
 }
 .table-title-text{
     width: 60%;
     margin-left: 0px;
     background:white;
-    height: 20px;
+
     font-weight: 700;
     font-size: 1.1rem;
 }
@@ -40,15 +45,28 @@
     width: 150px;
     font-weight: 700;
     padding-top:10px;
+    font-size: 14px;
     text-align: center;
+    margin: auto;
     padding-bottom: 10px;
 }
 .flex{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    height: 36px;
+    padding-bottom: 6px;
+}
+.no-height{
+    height:fit-content;
+}
+.media-div{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
 }
 .search-bar{
-    height: 20px;
+    padding-right: 10px;
     border-radius: 15px;
 }
 .precentage-bar{
@@ -61,6 +79,9 @@
 }
 .second-vacine-color{
     background:rgb(182, 202, 81,0.8);
+}
+th{
+    font: 400 1rem Arial;
 }
 th:hover{
     cursor: pointer;
@@ -115,4 +136,7 @@ th:hover{
     width: 32px;
     height: 32px;
     margin:4px;
+}
+.table-hospital{
+    height: 30px;
 }

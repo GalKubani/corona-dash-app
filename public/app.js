@@ -1,3 +1,4 @@
+import {createPopupChart,createLabelData,createAChart} from "/utils/graph.js";
 const moreInfoModals=document.getElementsByClassName("more-info")
 const getDataURL=`http://localhost:2500/getUpdateObj`
 const getCityDataURL=`http://localhost:2500/getAllCityData`
@@ -27,6 +28,7 @@ const tableSearchBar=document.getElementById("search-bar-city")
 const tableSearchStoplight=document.getElementById("search-bar-stoplight")
 const tableHeaders=document.getElementsByTagName("th")
 
+
 let totalSumFirst=0,totalSumSecond=0
 let firstVacinationDailyTotalSum=[],secondVacinationDailyTotalSum=[]
 let mainDataBase={},cityDataBase={}, hospitalDataBase={}
@@ -45,12 +47,12 @@ function changeDisplayVisuals(){
     document.head.appendChild(link)
     displayButton.removeEventListener('click',changeDisplayVisuals)
     displayButton.addEventListener('click',revertDisplayVisuals)
-    vacinationDaily.config.data.datasets[0].backgroundColor="rgb(147, 236, 147,0.9)"
-    vacinationDaily.config.data.datasets[1].backgroundColor="rgb(198, 17, 17,0.9)"
-    vacinationTotal.config.data.datasets[0].backgroundColor="rgb(147, 236, 147,0.9)"
-    vacinationTotal.config.data.datasets[1].backgroundColor="rgb(198, 17, 17,0.9)"
-    vacinationPrecentage.config.data.datasets[0].backgroundColor="rgb(147, 236, 147,0.9)"
-    vacinationPrecentage.config.data.datasets[1].backgroundColor="rgb(198, 17, 17,0.9)"
+    vacinationDaily.config.data.datasets[0].backgroundColor="rgb(159,250,130)"
+    vacinationDaily.config.data.datasets[1].backgroundColor="rgb(253,130,100)"
+    vacinationTotal.config.data.datasets[0].backgroundColor="rgb(159,250,130)"
+    vacinationTotal.config.data.datasets[1].backgroundColor="rgb(253,130,100)"
+    vacinationPrecentage.config.data.datasets[0].backgroundColor="rgb(159,250,130)"
+    vacinationPrecentage.config.data.datasets[1].backgroundColor="rgb(253,130,100)"
     Chart.defaults.global.defaultFontColor="white"
     vacinationDaily.update()
     vacinationTotal.update()
@@ -280,6 +282,7 @@ function createHospitalStatusTable(currentHospitalDatabase){
     hospitalTableBody.innerHTML=""
     for(let i=0;i<currentHospitalDatabase.length;i++){
         let newRow=document.createElement('tr')
+        if( i===currentHospitalDatabase.length-1) newRow.style.border="0px"
         let hospitalName=createTableData(newRow)
         hospitalName.innerHTML=currentHospitalDatabase[i].name
         let generalOccupancyPrecentageData=createTableData(newRow)
@@ -297,17 +300,21 @@ function createStoplightTable(currentStoplightDatabase){
     stoplightTableBody.innerHTML=""
     for(let i=0;i<currentStoplightDatabase.length;i++){
         let newRow=document.createElement('tr')
+        if( i===currentStoplightDatabase.length-1) newRow.style.border="0px"
         let index=currentStoplightDatabase[i].dailyStoplightData.length-1
         let cityName=createTableData(newRow)
         cityName.innerHTML=currentStoplightDatabase[i].name;
         let stoplightResultData=createTableData(newRow)
-        gradeContainer=setStoplightColor(Math.floor((Math.random() * 100))/10);
+        let gradeContainer=setStoplightColor(Math.floor((Math.random() * 100))/10);
         stoplightResultData.appendChild(gradeContainer)
         let totalPatientsFor10000Data=createTableData(newRow)
+        totalPatientsFor10000Data.classList.add("bolder-data")
         totalPatientsFor10000Data.innerHTML=parseFloat(Math.round(((currentStoplightDatabase[i].dailyStoplightData[index].newActivePatientsDaily)/(currentStoplightDatabase[i].population/10000))* Math.pow(10, 2)) /Math.pow(10,2)).toFixed(2)
         let dailyPositivePrecentageData=createTableData(newRow)
+        dailyPositivePrecentageData.classList.add("bolder-data")
         dailyPositivePrecentageData.innerHTML=currentStoplightDatabase[i].dailyStoplightData[index].positivesPrecentageDaily+"%"
         let dailyChangeRatePrecentage=createTableData(newRow)
+        dailyChangeRatePrecentage.classList.add("bolder-data")
         let precentage=parseFloat(Math.round(((currentStoplightDatabase[i].dailyStoplightData[index].newActivePatientsDaily)/(currentStoplightDatabase[i].dailyStoplightData[index-1].newActivePatientsDaily)*100)* Math.pow(10, 2)) /Math.pow(10,2)).toFixed(2)
         currentStoplightDatabase[i].dailyStoplightData[index].newActivePatientsDaily>currentStoplightDatabase[i].dailyStoplightData[index-1].newActivePatientsDaily?precentage*=-1:precentage*=1
         dailyChangeRatePrecentage.innerHTML= precentage+"%"
@@ -320,6 +327,7 @@ function createCityTable(currentCityDataBase){
     cityStatusTableBody.innerHTML=""
     for(let i=0;i<currentCityDataBase.length;i++){
         let newRow=document.createElement('tr')
+        if( i===currentCityDataBase.length-1) newRow.style.border="0px"
         let cityName=createTableData(newRow)
         cityName.innerHTML=currentCityDataBase[i].name;
         let firstVacineData=createTableData(newRow)
@@ -335,7 +343,7 @@ function createCityTable(currentCityDataBase){
         let totalPatientsFor10000Data=createTableData(newRow)
         totalPatientsFor10000Data.innerHTML=parseFloat(Math.round((currentCityDataBase[i].totalPatients/(currentCityDataBase[i].population/10000)) * Math.pow(10, 2)) /Math.pow(10,2)).toFixed(2)
         let stoplightResultData=createTableData(newRow)
-        gradeContainer=setStoplightColor(Math.floor((Math.random() * 100))/10);
+        let gradeContainer=setStoplightColor(Math.floor((Math.random() * 100))/10);
         stoplightResultData.appendChild(gradeContainer)
         cityStatusTableBody.appendChild(newRow)
     }
@@ -357,7 +365,10 @@ function setStoplightColor(stoplightGrade){
 function setModalEvents(){
     for(let modal of moreInfoModals){
         modal.addEventListener("mouseover",function(){
+            modal.firstElementChild.style.display="block";
+
             setTimeout(() => {
+
                 modal.firstElementChild.style.opacity=1;
             }, 10);
         })
@@ -365,6 +376,7 @@ function setModalEvents(){
             setTimeout(() => {
                 modal.firstElementChild.style.opacity=0;
             }, 200);
+            modal.firstElementChild.style.display="none";
         })
     }
 }
@@ -374,11 +386,19 @@ getHospitalDataBase()
 setModalEvents()
 setChartButtonEvents()
 function createVacinationCharts(){
-    let index =checkFilterValue(vacinationDailyChartSelector)
-    updateChartData(index)
+    resetDataFirstChart()
+    updateChartData(checkFilterValue(vacinationDailyChartSelector))
     vacinationDaily= createAChart('bar',vacinationDailyChart,firstVacinationArray,secondVacinationArray,dateData,1)
+    checkIfAccessableView(vacinationDaily)
+    resetDataStorage()
+    updateChartData(checkFilterValue(vacinationTotalChartSelector),'second')
     vacinationTotal=createAChart('line',vacinationTotalChart,firstVacinationDailyTotalSum,secondVacinationDailyTotalSum,dateData,1)
+    checkIfAccessableView(vacinationTotal)
+    resetDataStorage()
+    resetDataPrecentage()
+    updateChartData(checkFilterValue(vacinationPrecentageChartSelector),'third')
     vacinationPrecentage=createAChart('line',vacinationPrecentageChart,firstVactionationPrecentage,secondVactionationPrecentage,dateData,false)
+    checkIfAccessableView(vacinationPrecentage)
 }
 function checkFilterValue(selector){
     let filterIndex=mainDataBase.updateVacinations.length;
@@ -386,35 +406,35 @@ function checkFilterValue(selector){
         case "last-month":   filterIndex>30?filterIndex=30:filterIndex+=0;break;
         case "last-week": filterIndex>7?filterIndex=7:filterIndex+=0;break;
         case "last-two-weeks": filterIndex>14?filterIndex=14:filterIndex+=0;break;
-        case "all-time": break;
+        case "all-time":  break;
     }
     return filterIndex
 }
 function updateChartData(filterIndex,whichChart){
-    for(let i=0;i<filterIndex;i++){
+    for(let i=0,j=mainDataBase.updateVacinations.length-filterIndex;i<filterIndex;i++,j++){
         if(!whichChart){
-            firstVacinationArray.push(mainDataBase.updateVacinations[i].totalDailyVacinatedOnce)
-            secondVacinationArray.push(mainDataBase.updateVacinations[i].totalDailyVacinatedTwice)
+            firstVacinationArray.push(mainDataBase.updateVacinations[j].totalDailyVacinatedOnce)
+            secondVacinationArray.push(mainDataBase.updateVacinations[j].totalDailyVacinatedTwice)
             totalSumFirst+=(firstVacinationArray[i]*1)
             totalSumSecond+=(secondVacinationArray[i]*1)
             firstVacinationDailyTotalSum.push(totalSumFirst)
             secondVacinationDailyTotalSum.push(totalSumSecond)
             firstVactionationPrecentage.push((totalSumFirst/population)*100)
             secondVactionationPrecentage.push((totalSumSecond/population)*100)
-            dateData.push(mainDataBase.updateDates[i])
+            dateData.push(mainDataBase.updateDates[j])
             continue;
         }
         if(whichChart==="first"){
-            firstVacinationArray.push(mainDataBase.updateVacinations[i].totalDailyVacinatedOnce)
-            secondVacinationArray.push(mainDataBase.updateVacinations[i].totalDailyVacinatedTwice)
+            firstVacinationArray.push(mainDataBase.updateVacinations[j].totalDailyVacinatedOnce)
+            secondVacinationArray.push(mainDataBase.updateVacinations[j].totalDailyVacinatedTwice)
         }
         else {
-            totalSumFirst+=(firstVacinationArray[i]*1)
-            totalSumSecond+=(secondVacinationArray[i]*1)
+            totalSumFirst+=(mainDataBase.updateVacinations[j].totalDailyVacinatedOnce*1)
+            totalSumSecond+=(mainDataBase.updateVacinations[j].totalDailyVacinatedTwice*1)
             if(whichChart==="second"){
                 firstVacinationDailyTotalSum.push(totalSumFirst)
                 secondVacinationDailyTotalSum.push(totalSumSecond)
-            }
+            }   
             else{
                 firstVactionationPrecentage.push((totalSumFirst/population)*100)
                 secondVactionationPrecentage.push((totalSumSecond/population)*100)
@@ -422,75 +442,6 @@ function updateChartData(filterIndex,whichChart){
         }
         dateData.push(mainDataBase.updateDates[i+(mainDataBase.updateDates.length-filterIndex)])//nn to be i + (total-range)
     }
-}
-function createAChart(chartType,contextElement,dataSet1,dataSet2,labelData,fillValue){
-    let stackedValue=true
-    labelData=createLabelData(labelData)
-    let fillValueDataset2=fillValue
-    if(chartType==='line') {
-        stackedValue=false
-        if(fillValue===1)
-            fillValueDataset2='origin'
-    }
-    return new Chart(contextElement,{
-        type:chartType,
-        data:{
-            labels: labelData,
-            datasets:[{
-                label:'מתחסנים מנה ראשונה',
-                data: dataSet1,
-                backgroundColor:'rgb(28, 125, 126,0.8)',
-                fill:fillValue,
-                hoverBorderWidth:"10px"
-            },{
-                label:'מתחסנים מנה שנייה',
-                data: dataSet2,
-                backgroundColor:'rgb(182, 202, 81,0.8)',
-                fill:fillValueDataset2,
-                hoverBorderWidth:"10px"
-            }],
-        },
-        options:{
-            responsive:true,
-            maintainAspectRatio: false,
-            hover:{
-                mode:'nearest',
-                intersect:true
-            }, 
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            scales: {
-                xAxes: [{
-                    maxBarThickness:8,
-                    stacked: stackedValue,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'תאריך',
-                    },
-                }],
-                yAxes: [{
-                    stacked: stackedValue,
-                }]
-            },
-            legend:{
-                labels:{
-                    usePointStyle: true,
-                    boxWidth:8,
-                },
-                reverse:true
-            }
-        }
-    })
-}
-function createLabelData(labelData){
-    for(let i=0;i<labelData.length;i++){
-        const options = { month:'numeric',day:'numeric'};
-        labelData[i]= new Date(labelData[i])
-        labelData[i]=labelData[i].toLocaleDateString('he-IL',options)
-    }
-    return labelData
 }
 function updateDatabaseUI(updateIndex){
     updateDeceased()
@@ -513,8 +464,9 @@ function updateDatabaseUI(updateIndex){
         vacinationTotal=createAChart('line',vacinationTotalChart,firstVacinationDailyTotalSum,secondVacinationDailyTotalSum,dateData,1)
         checkIfAccessableView(vacinationTotal)
     })
-    vacinationPrecentageChartSelector.addEventListener('change',(event)=>{
+     vacinationPrecentageChartSelector.addEventListener('change',(event)=>{
         resetDataStorage()
+        resetDataPrecentage()
         updateChartData(checkFilterValue(vacinationPrecentageChartSelector),'third')
         vacinationPrecentage.destroy()
         vacinationPrecentage=createAChart('line',vacinationPrecentageChart,firstVactionationPrecentage,secondVactionationPrecentage,dateData,false)
@@ -538,11 +490,11 @@ function updateDeceased(){
 }
 function updateVacinated(updateIndex){
     statsContainers[3].firstElementChild.firstElementChild.innerHTML=
-    "<h4> מתחסנים מנה ראשונה </h4><h3>"+mainDataBase.totalVacinatedOnce+"</h3>"
+    "<h4> מתחסנים מנה ראשונה </h4><h4 class='distance'>"+mainDataBase.totalVacinatedOnce+"</h4>"
     statsContainers[3].firstElementChild.lastElementChild.firstElementChild.innerHTML=
     "<span class='change bold'>"+mainDataBase.updateVacinations[updateIndex].totalDailyVacinatedOnce+"+ </span>מחצות"
     statsContainers[3].lastElementChild.firstElementChild.innerHTML=
-    "<h4> מתחסנים מנה שנייה </h4><h3>"+mainDataBase.totalVacinatedTwice+"</h3>"
+    "<h4> מתחסנים מנה שנייה </h4><h4 class='distance'>"+mainDataBase.totalVacinatedTwice+"</h4>"
     statsContainers[3].lastElementChild.lastElementChild.firstElementChild.innerHTML=
     "<span class='change bold'>"+mainDataBase.updateVacinations[updateIndex].totalDailyVacinatedTwice+"+ </span>מחצות"
 }
@@ -554,7 +506,7 @@ function updateTests(updateIndex){
     statsContainers[5].firstElementChild.nextElementSibling.appendChild(yesterdayTestsDiv)
     statsContainers[0].lastElementChild.lastElementChild.firstElementChild.innerHTML=(mainDataBase.totalTests)+" "
     let totalPositives=Math.floor(mainDataBase.updateTests[updateIndex].totalDailyTests/mainDataBase.updateTests[updateIndex].totalDailyPositivesPrecentage)
-    statsContainers[0].lastElementChild.firstElementChild.innerHTML="<h3>"+totalPositives+"</h3> "
+    statsContainers[0].lastElementChild.firstElementChild.innerHTML="<h3 class='distance'>"+totalPositives+"</h3> "
     statsContainers[0].lastElementChild.firstElementChild.nextElementSibling.firstElementChild.innerHTML=Math.floor(mainDataBase.updateTests[updateIndex-1].totalDailyTests/mainDataBase.updateTests[updateIndex-1].totalDailyPositivesPrecentage)+"+ "
 }
 function updatePatients(updateIndex){
@@ -564,9 +516,9 @@ function updatePatients(updateIndex){
     statsContainers[2].lastElementChild.firstElementChild.nextElementSibling.firstElementChild.innerHTML=mainDataBase.updatePatients[updateIndex].totalDailyHospitalised+" "
     patientConditionDiv.firstElementChild.lastElementChild.innerHTML=mainDataBase.totalCritical
     patientConditionDiv.lastElementChild.lastElementChild.innerHTML=mainDataBase.totalRessesitated
-    homeAmountText.innerHTML= mainDataBase.totalActive* 0.84;
-    hotelAmountText.innerHTML= mainDataBase.totalActive* 0.1;
-    hospitalAmountText.innerHTML= mainDataBase.totalActive* 0.06;
+    homeAmountText.innerHTML= Math.floor(mainDataBase.totalActive* 0.84);
+    hotelAmountText.innerHTML= Math.floor(mainDataBase.totalActive* 0.1);
+    hospitalAmountText.innerHTML= Math.floor(mainDataBase.totalActive* 0.06);
 }                                                                                                           
 function resetDataStorage(){
     totalSumFirst=0
@@ -586,92 +538,61 @@ function resetDataPrecentage(){
     dateData=[]
 }
 function setChartButtonEvents(){
+    
     deceasedChartButton.addEventListener('click',openChart)
     positivesChartButton.addEventListener('click',openChart)
 }
 function openChart(event){
+    event.preventDefault()
     let contextElement=positivesDailyChart
-    let labelData=createLabelData(dateData)
+    let labelData=[]
+    for(let i=0;i<mainDataBase.updateDates.length;i++){
+        labelData.push(mainDataBase.updateDates[i])
+    }
+    labelData=createLabelData(labelData)
     let dataSet=[]
-    if(event.target.id==="deceased-button"){
+    if(event.target.id==="deceased-button"||event.target.parentElement.parentElement.id==="deceased-button"
+    ||event.target.parentElement.id==="deceased-button"){
         for(let i=0;i<mainDataBase.updatePatients.length;i++){
             dataSet.push(mainDataBase.updatePatients[i].totalDailyDeceased)
         }
         contextElement=deceasedDailyChart
-        deceasedDaily=createPopupChart(contextElement,labelData,dataSet,'נפטרים - שינוי יומי','כמות נפטרים')
-        deceasedChartButton.nextElementSibling.classList.add("open")
+        deceasedDaily=createPopupChart(contextElement,labelData,dataSet,'נפטרים - שינוי יומי','כמות נפטרים' ,   25)
+        popupChartContainers[0].classList.add("open")
+        deceasedChartButton.addEventListener('click',closeChart)
+        deceasedChartButton.removeEventListener('click',openChart)
         try{
             positivesDaily.destroy()
-            positivesChartButton.nextElementSibling.classList.remove("open")
+            popupChartContainers[1].classList.remove("open")
         }catch(err){}
     } 
-    else{
+    if(event.target.id==="positives-button"||event.target.parentElement.parentElement.id==="positives-button"
+    ||event.target.parentElement.id==="positives-button"){
         for(let i=0;i<mainDataBase.updateTests.length;i++){
             dataSet.push(mainDataBase.updateTests[i].totalDailyTests)
         }
         contextElement=positivesDailyChart
-        positivesDaily=createPopupChart(contextElement,labelData,dataSet,'בדיקות - מגמת שינוי יומית','מספר בדיקות יומיות')
-        positivesChartButton.nextElementSibling.classList.add("open")
+        positivesDaily=createPopupChart(contextElement,labelData,dataSet,'בדיקות - מגמת שינוי יומית','מספר בדיקות יומיות', 25000)
+        popupChartContainers[1].classList.add("open")
+        positivesChartButton.addEventListener('click',closeChart)
+        positivesChartButton.removeEventListener('click',openChart)
         try{
             deceasedDaily.destroy()
-            deceasedChartButton.nextElementSibling.classList.remove("open")
+            popupChartContainers[0].classList.remove("open")
         }catch(err){}
     }
-    event.target.nextElementSibling.classList.add("open")
-    event.target.addEventListener('click',closeChart)
-    event.target.removeEventListener('click',openChart)
 }
 function closeChart(event){
-    event.target.nextElementSibling.classList.remove("open")
-    event.target.addEventListener('click',openChart)
-    event.target.removeEventListener('click',closeChart)
-}
-function createPopupChart(contextElement,labelData,dataSet,datasetStringValue,yAxisLabelStringValue){
-    return new Chart(contextElement,{
-        type:'line',
-        data:{
-            labels: labelData,
-            datasets:[{
-                label:datasetStringValue,
-                data: dataSet,
-                backgroundColor:' rgb(27, 115, 230)',
-                fill:0,
-                borderWidth:'2',
-                borderColor:' rgb(27, 115, 230)',
-                lineTension:0
-            }]
-        },
-        options:{
-            responsive:true,
-            maintainAspectRatio: false,
-            hover:{
-                mode:'nearest',
-                intersect:true
-            }, 
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'תאריך',
-                    },
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: yAxisLabelStringValue,
-                    },
-                }]
-            },
-            legend:{
-                labels:{
-                    boxWidth:0,
-                },
-                reverse:true
-            }
-        }
-    })
+    if(event.target.id==="deceased-button"||event.target.parentElement.parentElement.id==="deceased-button"
+    ||event.target.parentElement.id==="deceased-button"){
+        deceasedChartButton.addEventListener('click',openChart)
+        deceasedChartButton.removeEventListener('click',closeChart)
+        popupChartContainers[0].classList.remove("open")
+    }
+    if(event.target.id==="positives-button"||event.target.parentElement.parentElement.id==="positives-button"
+    ||event.target.parentElement.id==="positives-button"){
+        positivesChartButton.addEventListener('click',openChart)
+        positivesChartButton.removeEventListener('click',closeChart)
+        popupChartContainers[1].classList.remove("open")
+    }
 }

@@ -1,17 +1,19 @@
 .corona-stats-main{
     display: flex;
     flex-wrap: wrap;
-    background: rgba(152, 168, 240, 0.3);
-    padding: 15px;
+    background: #edf1f7;
+    padding: 35px;
+    padding-bottom: 5px;
     justify-content: space-between;
 }
 .stats-container{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    overflow:visible;
     padding: 1rem;
-    width: 230px;
-    height: 240px;
+    width: 210px;
+    height: 190px;
     background: white;
     margin-bottom: 20px;
     justify-content: flex-start;
@@ -22,6 +24,7 @@
 .stats-divider{
     display: flex;
     position: relative;
+    border-bottom: 1px solid rgb(229,242,245);
     top:0;
     justify-content: flex-start;
     align-items: flex-start;
@@ -39,8 +42,8 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
 }
+
 .row{
     flex-direction: row;
 }
@@ -53,13 +56,12 @@
     text-align: center;
     font-weight: 500;
     margin-right: 8px;
-    margin-top: 10px;
 }
 .more-info:hover{
     cursor: default;
 }
 .info-modal{
-    display: block;
+    display: none;
     opacity: 0;
     width: 280px;
     z-index: 30;
@@ -77,9 +79,14 @@
 .last{
     left:280px;
 }
+h4{
+    font-size:  0.9rem;
+}
+h3{
+    font-size: 1.4rem;
+}
 h4,h3,h2{
     margin: 0;
-    margin-top: 10px;
 }
 .vacination-title{
     font-size: 1.6rem;
@@ -95,9 +102,9 @@ h4,h3,h2{
 .patient-location-option{
     display: flex;
     flex-direction: column;
-    max-width: 33%;
     padding:1%;
     margin: 3px;
+    margin-top: 35px;
     font-size: 0.75rem;
     font-weight: 500;
 }
@@ -124,7 +131,45 @@ h4,h3,h2{
     height: 8px;
     border-radius: 50%;
 }
+.logo-container{
+    margin: 0px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+    margin-left: 5px;
+    border: 1px solid rgb(124, 124, 124,0.2);
+}
+.logo-bar{
+    width: 0.1rem;
+    margin:2px;
+    margin-bottom: 3px;
+    padding-bottom: 2px;
+    align-self: flex-end;
+    background: rgb(48, 48, 48);
+}
+.largest{
+    margin-right: 4px;
+    height: 65%;
+}
+.medium{
+    height: 45%;
+}
+.smallest{
+    height: 25%;
+}
 .change{
     font-size: 0.9rem;
+    margin-top: 5px;
+}
+.noborder{
+    border: 0px;
+}
+.distance{
     margin-top: 5px;
 }

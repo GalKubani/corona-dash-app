@@ -1,5 +1,8 @@
 .vacination-title{
-    width: 100%;
+    width: 95%; 
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: white;
 }
 .chart-title{
     display: flex;
@@ -8,20 +11,30 @@
 }
 .chart-title-text{
     width: 55%;
+    font-weight: 700;
 }
 .chart-range{
-    background: white;
+    background: rgb(229,242,245,0.5);
+    border-radius: 15px;
+    font-weight: 700;
+    height: 30px;
+    padding: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
     border: 0px;
     margin-left: 40px;
 }
 .deceased-chart-button{
     position: relative;
-    top:90px;
+    display: flex;
+    top:80px;
     right: 5px;
 }
 .positives-chart-button{
     position: relative;
-    top:46px;
+    display: flex;
+    width: 100%;
+    top:38px;
     right: 5px;
 }
 .deceased-chart-button:hover,
@@ -35,25 +48,40 @@
     border: 1px solid black;
 }
 .chart-container{
-    width: 400px;
-    height: 300px;
+    width: 33.3336%;
+    height: 350px;
     position: relative;
-    background: white;
+    border: 1px solid #e7e7e7;
+    padding:24px;
+    overflow: hidden;
 }
 .vacination-stats-main{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding:20px;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
     align-items: center;
-    background:  rgba(152, 168, 240, 0.3);
+    background:#edf1f7;
+}
+.charts-container{
+    display: flex;
+    width: 95%; 
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 .open{
     display: flex;
-    position: relative;
+    position: absolute;
     width: 400px;
     z-index: 30;
     height: 300px;
     top:00px;
-    left: 630px;
+    left: 480px;
+}
+.positioning{
+    left:280px;
 }

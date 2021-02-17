@@ -1,8 +1,9 @@
 .first-vacine-color{
-    background: rgba(42, 238, 107, 0.8);
+    background: rgb(159,250,130);
+    
 }
 .second-vacine-color{
-    background:rgba(212, 83, 83, 0.8);
+    background:rgb(253,130,100);
 }
 ::-webkit-scrollbar-thumb {
     background: #888; 
@@ -14,30 +15,37 @@
     background:transparent;
 }
 .popup-chart-container{
-    background: rgba(27, 36, 71, 1);
-    border: 1px solid white;
+    box-shadow: 0.5px 0px 0px 0.5px rgb(32, 32, 32,0.3);
 }
 .chart-container{
-    background: rgba(27, 36, 71, 0.8);
+    background: rgb(56,79,95);
     border: 1px solid white;
-    padding: 15px;
 }
-.vacination-title,.vacination-stats-main,
-.corona-stats-main,.table,.table-blanks-container,
-.table-container,.blank-chart,td,::-webkit-scrollbar-track {
-    background: rgba(38, 56, 124, 0.8);
+.vacination-stats-main,
+.corona-stats-main,.table-blanks-container,::-webkit-scrollbar-track {
+    background: rgb(73,102,122);
 }
 ::placeholder,.flex,.light,table,.chart-range,.info-modal
-,.chart-title,.table-body,.vacination-title,th,td,
+,.chart-title,.table-body,.vacination-title,th,td,.popup-chart-container,
 .stats-container,.table-title-text{
     color: white;
 }
-.stats-container,.chart-range{
-    background: rgba(27, 36, 71, 0.8);
+.stats-container,.chart-range,.vacination-title
+,.table,td,.info-modal,.popup-chart-container,
+.table-container,.blank-chart{
+    background:  rgb(56,79,95);
 }
-.info-modal{
-    background: rgba(27, 36, 71,1);
+.table{
+    border-collapse: collapse; 
 }
+.noborder{
+    border: 0px;
+}
+tr{
+    height:50px;
+    border-bottom: 0.5px solid white;
+}
+
 .more-info{
     background-color:white;
     color: black;
@@ -57,8 +65,32 @@ th{
 .search-bar{
     background: transparent;
     border-width:1px;
-    border-color: gray;
+    color: rgb(91,108,120);
 }
 .gradeContainer{
     color: black;
+}
+.bolder-data{
+    background: rgb(49,69,83);
+}
+.bolder-header{
+    background: rgb(53,64,71);
+}
+th{
+    background: rgb(42,59,71);
+}
+.logo-bar{
+    background: white;
+}
+.logo-container{
+    background: rgb(53,64,71);
+}
+.chart-range{
+    border: 1px solid gray;
+}
+@media (max-width:400px){
+    .chart-container{
+        border-left: 0;
+        border-right: 0;
+    }
 }
